@@ -9,7 +9,7 @@ const awards = [
     date: "Jul 2025",
     description: "Honored to receive the Director's Award for exceptional teamwork and collaboration. This recognition reflects my commitment to building great products together with my team, supporting colleagues, and contributing to a positive work environment.",
     images: [
-      { thumbnail: "/1.png", full: "/award2.jpg" },
+      { thumbnail: "/1.png", full: "/award2.JPG" },
       { thumbnail: "/award3.jpg", full: "/award3.jpg" },
       { thumbnail: "/award1.jpeg", full: "/award1.jpeg" },
     ],
