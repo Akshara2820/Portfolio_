@@ -13,7 +13,7 @@ const HeroSection = () => {
   return (
     <div>
 
-      <div className="m-0 -mt-10 min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white px-4 sm:px-6 lg:px-10">
+      <div id="home" className="m-0 -mt-10 min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white px-4 sm:px-6 lg:px-10">
 
         <div className=" mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
 
@@ -132,7 +132,7 @@ const HeroSection = () => {
                   transition={{ repeat: Infinity, duration: 5 }}
                 >
                   <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                    <img src="/pic.jpeg" alt="profile" className="w-full h-full object-cover" />
+                    <img src="/pic3.jpg" alt="profile" className="w-full h-full object-cover" />
                   </div>
                 </motion.div>
               </div>
