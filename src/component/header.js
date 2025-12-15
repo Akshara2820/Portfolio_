@@ -1,88 +1,127 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi';
 
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
-    };
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+            const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+            for (const section of sections.reverse()) {
+                const element = document.getElementById(section);
+                if (element && window.scrollY >= element.offsetTop - 200) {
+                    setActiveSection(section);
+                    break;
+                }
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+
+    const navItems = [
+        { name: 'Home', href: '#home' },
+        { name: 'About', href: '#about' },
+        { name: 'Skills', href: '#skills' },
+        { name: 'Projects', href: '#projects' },
+    ];
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[#0b0b0b]/90 border-b border-white/5">
+        <motion.header 
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+                scrolled 
+                    ? 'backdrop-blur-xl bg-[#0b0b0b]/80 border-b border-white/10 shadow-lg shadow-black/20' 
+                    : 'backdrop-blur-md bg-transparent border-b border-transparent'
+            }`}
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
-
-                {/* Logo */}
-                <div className='flex gap-3 items-center group cursor-pointer'>
+                <motion.div className='flex gap-3 items-center group cursor-pointer' whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
-                        <svg
-                            className="relative w-9 h-9 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <motion.div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"
+                            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                        />
+                        <svg className="relative w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
                         </svg>
                     </div>
+                    <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 tracking-tight">AM</div>
+                </motion.div>
 
-                    <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 tracking-tight">
-                        AM
-                    </div>
-                </div>
-
-                {/* Desktop Menu */}
-                <nav className="hidden md:flex items-center gap-1">
-                    <a href="#home" className="relative px-4 py-2 text-sm font-medium text-white rounded-full hover:bg-white/10 transition-all duration-300">
-                        Home
-                    </a>
-                    <a href="#about" className="relative px-4 py-2 text-sm font-medium text-gray-400 hover:text-white rounded-full hover:bg-white/10 transition-all duration-300">
-                        About
-                    </a>
-                    <a href="#skills" className="relative px-4 py-2 text-sm font-medium text-gray-400 hover:text-white rounded-full hover:bg-white/10 transition-all duration-300">
-                        Skills
-                    </a>
-                    <a href="#projects" className="relative px-4 py-2 text-sm font-medium text-gray-400 hover:text-white rounded-full hover:bg-white/10 transition-all duration-300">
-                        Projects
-                    </a>
-                    <a href="#contact" className="ml-2 px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full hover:from-cyan-600 hover:to-blue-700 hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
-                        Contact
-                    </a>
+                <nav className="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-sm rounded-full p-1.5 border border-white/10">
+                    {navItems.map((item, index) => (
+                        <motion.a key={item.name} href={item.href}
+                            className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                        >
+                            {activeSection === item.href.slice(1) && (
+                                <motion.div className="absolute inset-0 bg-white/10 rounded-full" layoutId="activeNav" transition={{ type: "spring", stiffness: 380, damping: 30 }} />
+                            )}
+                            <span className="relative z-10">{item.name}</span>
+                        </motion.a>
+                    ))}
+                    <motion.a href="#contact" className="relative ml-2 px-5 py-2 text-sm font-medium text-white rounded-full overflow-hidden group"
+                        initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+                        whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    >
+                        <motion.div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600"
+                            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                            transition={{ duration: 3, repeat: Infinity }} style={{ backgroundSize: '200% 200%' }}
+                        />
+                        <span className="relative z-10">Contact</span>
+                    </motion.a>
                 </nav>
 
-                {/* Mobile Menu Button */}
-                <div className="md:hidden">
+                <motion.div className="md:hidden" whileTap={{ scale: 0.9 }}>
                     <button onClick={toggleMenu} className="relative p-2 text-white rounded-lg hover:bg-white/10 transition-all duration-300 focus:outline-none">
-                        {menuOpen ? <HiOutlineX className="w-6 h-6" /> : <HiOutlineMenuAlt3 className="w-6 h-6" />}
+                        <AnimatePresence mode="wait">
+                            {menuOpen ? (
+                                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                    <HiOutlineX className="w-6 h-6" />
+                                </motion.div>
+                            ) : (
+                                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                    <HiOutlineMenuAlt3 className="w-6 h-6" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </button>
-                </div>
+                </motion.div>
             </div>
 
-            {/* Mobile Menu */}
-            {menuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-[#0b0b0b]/95 backdrop-blur-lg border-b border-white/5 px-6 py-6 space-y-2">
-                    <a href="#home" className="block px-4 py-3 text-white font-medium rounded-lg hover:bg-white/10 transition-all duration-300" onClick={toggleMenu}>
-                        Home
-                    </a>
-                    <a href="#about" className="block px-4 py-3 text-gray-400 font-medium rounded-lg hover:bg-white/10 hover:text-white transition-all duration-300" onClick={toggleMenu}>
-                        About
-                    </a>
-                    <a href="#skills" className="block px-4 py-3 text-gray-400 font-medium rounded-lg hover:bg-white/10 hover:text-white transition-all duration-300" onClick={toggleMenu}>
-                        Skills
-                    </a>
-                    <a href="#projects" className="block px-4 py-3 text-gray-400 font-medium rounded-lg hover:bg-white/10 hover:text-white transition-all duration-300" onClick={toggleMenu}>
-                        Projects
-                    </a>
-                    <a href="#contact" className="block mt-4 px-4 py-3 text-center text-white font-medium bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all duration-300" onClick={toggleMenu}>
-                        Contact
-                    </a>
-                </div>
-            )}
-           
-        </header>
-    )
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div className="md:hidden absolute top-full left-0 w-full bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-2"
+                        initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                        {navItems.map((item, index) => (
+                            <motion.a key={item.name} href={item.href}
+                                className={`block px-4 py-3 font-medium rounded-lg transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white bg-white/10' : 'text-gray-400 hover:bg-white/10 hover:text-white'}`}
+                                onClick={toggleMenu} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}
+                            >
+                                {item.name}
+                            </motion.a>
+                        ))}
+                        <motion.a href="#contact" className="block mt-4 px-4 py-3 text-center text-white font-medium bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg" onClick={toggleMenu}
+                            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
+                        >
+                            Contact
+                        </motion.a>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.header>
+    );
 }
 
 export default Header;
