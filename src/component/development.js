@@ -22,7 +22,7 @@ const ProcessStep = ({ step, index, isActive, onClick }) => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
-      viewport={{ once: false }}
+      viewport={{ once: true }}
       onClick={() => onClick(index)}
     >
       {/* Step number with emoji */}
@@ -111,17 +111,17 @@ function DevelopmentProcess() {
     <section id="process" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-24 text-white overflow-hidden">
       {/* Header */}
       <motion.div className="text-center mb-20"
-        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
       >
-        <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-white/10"
-          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: false }}
+        <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-gray-400/10 to-gray-500/10 border border-white/10"
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
         >
-          <FaCode className="text-purple-400" />
-          <span className="text-sm font-medium text-purple-400">How I Work</span>
+          <FaCode className="text-gray-400" />
+          <span className="text-sm font-medium text-gray-400">How I Work</span>
         </motion.div>
         <h2 className="text-4xl sm:text-5xl font-bold">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Development</span>{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Process</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-500">Process</span>
         </h2>
       </motion.div>
 
@@ -129,8 +129,8 @@ function DevelopmentProcess() {
       <div className="hidden md:block relative">
         {/* Connection line */}
         <div className="absolute top-[60px] left-[10%] right-[10%] h-[2px] bg-white/10" />
-        <motion.div className="absolute top-[60px] left-[10%] h-[2px] bg-gradient-to-r from-yellow-400 via-pink-400 via-blue-400 via-green-400 to-purple-400"
-          initial={{ width: 0 }} whileInView={{ width: '80%' }} transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }} viewport={{ once: false }}
+        <motion.div className="absolute top-[60px] left-[10%] h-[2px] bg-gradient-to-r from-yellow-400 via-gray-500 via-blue-400 via-green-400 to-gray-400"
+          initial={{ width: 0 }} whileInView={{ width: '80%' }} transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }} viewport={{ once: true }}
         />
 
         <div className="flex justify-between items-start px-[5%]">
@@ -184,7 +184,7 @@ function DevelopmentProcess() {
       <div className="md:hidden space-y-6">
         {steps.map((step, index) => (
           <motion.div key={index} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
-            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: false }}
+            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} viewport={{ once: true }}
             style={{ borderColor: `${step.color}30` }}
           >
             <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: `${step.color}20` }}>

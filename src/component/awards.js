@@ -51,7 +51,7 @@ const AwardCard = ({ award, index }) => {
     <>
       <motion.div className="relative flex flex-col lg:flex-row items-stretch gap-0 rounded-3xl overflow-hidden"
         initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: index * 0.2 }} viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8, delay: index * 0.2 }} viewport={{ once: true, amount: 0.3 }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
       >
@@ -85,7 +85,7 @@ const AwardCard = ({ award, index }) => {
         {/* Left - Content */}
         <motion.div className="lg:w-[45%] p-8 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 lg:border-r-0 lg:rounded-l-3xl lg:rounded-r-none rounded-t-3xl lg:rounded-t-none flex flex-col justify-center relative overflow-hidden group"
           initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }} viewport={{ once: false }}
+          transition={{ duration: 0.6, delay: index * 0.2 + 0.1 }} viewport={{ once: true }}
           whileHover={{ borderColor: 'rgba(234, 179, 8, 0.3)' }}
         >
           {/* Glow effect */}
@@ -97,7 +97,7 @@ const AwardCard = ({ award, index }) => {
           <div className="flex items-start gap-4 mb-6 relative z-10">
             <motion.div className="relative"
               initial={{ scale: 0, rotate: -180 }} whileInView={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 + 0.2, type: 'spring' }} viewport={{ once: false }}
+              transition={{ duration: 0.6, delay: index * 0.2 + 0.2, type: 'spring' }} viewport={{ once: true }}
             >
               <motion.div className="absolute inset-0 rounded-2xl bg-yellow-500/30 blur-xl"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 3, repeat: Infinity }}
@@ -119,7 +119,7 @@ const AwardCard = ({ award, index }) => {
             <div>
               <motion.h3 className="text-2xl font-bold text-white mb-1 flex items-center gap-2"
                 initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2 + 0.3 }} viewport={{ once: false }}
+                transition={{ delay: index * 0.2 + 0.3 }} viewport={{ once: true }}
               >
                 {award.title}
                 <motion.span 
@@ -132,7 +132,7 @@ const AwardCard = ({ award, index }) => {
               </motion.h3>
               <motion.p className="text-yellow-500/80 text-sm"
                 initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2 + 0.4 }} viewport={{ once: false }}
+                transition={{ delay: index * 0.2 + 0.4 }} viewport={{ once: true }}
               >
                 <FaMedal className="inline mr-2" />
                 {award.issuer} · {award.date}
@@ -142,7 +142,7 @@ const AwardCard = ({ award, index }) => {
 
           <motion.p className="text-white/60 leading-relaxed relative z-10"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-            transition={{ delay: index * 0.2 + 0.5 }} viewport={{ once: false }}
+            transition={{ delay: index * 0.2 + 0.5 }} viewport={{ once: true }}
           >
             {award.description}
           </motion.p>
@@ -153,7 +153,7 @@ const AwardCard = ({ award, index }) => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.2 + 0.6 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
           >
             <motion.span 
               animate={{ scale: [1, 1.2, 1] }}
@@ -169,13 +169,13 @@ const AwardCard = ({ award, index }) => {
         {award.images && award.images.length > 0 && (
           <motion.div className="lg:w-[55%] p-4 bg-gradient-to-br from-[#151515] to-[#0a0a0a] border border-white/10 lg:border-l-0 lg:rounded-r-3xl lg:rounded-l-none rounded-b-3xl lg:rounded-b-none grid grid-cols-2 gap-3"
             initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }} viewport={{ once: false }}
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }} viewport={{ once: true }}
           >
             {award.images.map((img, imgIndex) => (
               <motion.div key={imgIndex}
                 className={`relative overflow-hidden cursor-pointer rounded-xl group ${imgIndex === 0 ? 'col-span-1 row-span-2' : 'aspect-square'}`}
                 initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.2 + 0.4 + imgIndex * 0.1 }} viewport={{ once: false }}
+                transition={{ duration: 0.4, delay: index * 0.2 + 0.4 + imgIndex * 0.1 }} viewport={{ once: true }}
                 whileHover={{ scale: 1.03 }}
                 onHoverStart={() => setHoveredImage(imgIndex)}
                 onHoverEnd={() => setHoveredImage(null)}
@@ -219,10 +219,10 @@ const Awards = () => {
     <section id="awards" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-24 text-white">
       {/* Header */}
       <motion.div className="text-center mb-16"
-        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
       >
         <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20"
-          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: false }}
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
         >
           <FaTrophy className="text-yellow-400" />
           <span className="text-sm font-medium text-yellow-400">Recognition</span>
@@ -232,7 +232,7 @@ const Awards = () => {
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">Awards</span>
         </h2>
         <motion.p className="text-white/50 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: false }}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: true }}
         >
           Achievements and recognitions throughout my career journey
         </motion.p>

@@ -35,19 +35,19 @@ const LoadingScreen = ({ onComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] bg-[#0b0b0b] flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[9999] bg-background flex flex-col items-center justify-center overflow-hidden"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* Dramatic reveal curtains */}
       <motion.div
-        className="absolute inset-y-0 left-0 w-1/2 bg-[#0b0b0b] z-50"
+        className="absolute inset-y-0 left-0 w-1/2 bg-background z-50"
         initial={{ x: 0 }}
         animate={{ x: phase === 1 ? '-100%' : 0 }}
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
       />
       <motion.div
-        className="absolute inset-y-0 right-0 w-1/2 bg-[#0b0b0b] z-50"
+        className="absolute inset-y-0 right-0 w-1/2 bg-background z-50"
         initial={{ x: 0 }}
         animate={{ x: phase === 1 ? '100%' : 0 }}
         transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
@@ -55,10 +55,10 @@ const LoadingScreen = ({ onComplete }) => {
 
       {/* Animated grid background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
         <motion.div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(circle at 50% 50%, rgba(6,182,212,0.1) 0%, transparent 50%)' }}
+          style={{ background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 50%)' }}
           animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 3, repeat: Infinity }}
         />
@@ -75,25 +75,25 @@ const LoadingScreen = ({ onComplete }) => {
         <div className="relative">
           {/* Multiple glow layers */}
           <motion.div
-            className="absolute -inset-8 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-3xl blur-3xl"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3], rotate: [0, 180, 360] }}
+            className="absolute -inset-8 bg-gradient-to-r from-white via-gray-400 to-gray-600 rounded-3xl blur-3xl"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15], rotate: [0, 180, 360] }}
             transition={{ duration: 4, repeat: Infinity }}
           />
           <motion.div
-            className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl blur-xl"
-            animate={{ scale: [1.2, 1, 1.2], opacity: [0.4, 0.7, 0.4] }}
+            className="absolute -inset-4 bg-gradient-to-r from-gray-400 to-white rounded-2xl blur-xl"
+            animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
           
           {/* Logo container */}
           <motion.div
             className="relative px-8 py-6 rounded-2xl border border-white/20 backdrop-blur-sm"
-            style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.1), rgba(139,92,246,0.1))' }}
-            animate={{ borderColor: ['rgba(6,182,212,0.3)', 'rgba(139,92,246,0.3)', 'rgba(6,182,212,0.3)'] }}
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(128,128,128,0.05))' }}
+            animate={{ borderColor: ['rgba(255,255,255,0.2)', 'rgba(160,160,160,0.3)', 'rgba(255,255,255,0.2)'] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <motion.div
-              className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400"
+              className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500"
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
               transition={{ duration: 3, repeat: Infinity }}
               style={{ backgroundSize: '200% 200%' }}
@@ -108,8 +108,8 @@ const LoadingScreen = ({ onComplete }) => {
               key={i}
               className="absolute w-2 h-2 rounded-full"
               style={{
-                background: ['#06B6D4', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981', '#ffffff'][i],
-                boxShadow: `0 0 10px ${['#06B6D4', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981', '#ffffff'][i]}`,
+                background: ['#FFFFFF', '#E0E0E0', '#C0C0C0', '#A0A0A0', '#808080', '#606060'][i],
+                boxShadow: `0 0 10px ${['#FFFFFF', '#E0E0E0', '#C0C0C0', '#A0A0A0', '#808080', '#606060'][i]}`,
               }}
               animate={{
                 rotate: 360,
@@ -130,14 +130,14 @@ const LoadingScreen = ({ onComplete }) => {
       {/* Progress bar with glow */}
       <div className="relative w-72">
         <motion.div
-          className="absolute -inset-2 bg-gradient-to-r from-cyan-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-lg"
+          className="absolute -inset-2 bg-gradient-to-r from-white/20 via-gray-400/20 to-gray-600/20 rounded-full blur-lg"
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
         <div className="relative h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/10">
           <motion.div
             className="h-full rounded-full relative overflow-hidden"
-            style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #EC4899)' }}
+            style={{ background: 'linear-gradient(90deg, #FFFFFF, #A0A0A0, #606060)' }}
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}
@@ -156,14 +156,14 @@ const LoadingScreen = ({ onComplete }) => {
       {/* Loading text with typewriter effect */}
       <motion.div className="mt-6 flex items-center gap-2">
         <motion.span
-          className="text-white/60 text-sm font-mono"
+          className="text-text-muted text-sm font-mono"
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           {progress < 100 ? 'Crafting experience' : 'Ready!'}
         </motion.span>
         <motion.span
-          className="text-cyan-400 font-mono font-bold"
+          className="text-primary font-mono font-bold"
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 0.5, repeat: Infinity }}
         >
@@ -171,30 +171,27 @@ const LoadingScreen = ({ onComplete }) => {
         </motion.span>
       </motion.div>
 
-      {/* Floating particles */}
+      {/* Reduced floating particles for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full"
             style={{
-              width: Math.random() * 6 + 2,
-              height: Math.random() * 6 + 2,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: ['#06B6D4', '#8B5CF6', '#EC4899'][Math.floor(Math.random() * 3)],
-              boxShadow: `0 0 ${Math.random() * 10 + 5}px currentColor`,
+              width: 4,
+              height: 4,
+              left: `${(i * 12) + 10}%`,
+              top: `${(i * 10) + 20}%`,
+              background: ['#FFFFFF', '#A0A0A0', '#606060'][i % 3],
             }}
             animate={{
-              y: [0, -200],
-              x: [0, (Math.random() - 0.5) * 100],
-              opacity: [0, 0.8, 0],
-              scale: [0, 1, 0],
+              y: [0, -150],
+              opacity: [0, 0.6, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 3,
+              duration: 4,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: i * 0.4,
               ease: 'easeOut',
             }}
           />
@@ -203,25 +200,25 @@ const LoadingScreen = ({ onComplete }) => {
 
       {/* Corner decorations */}
       <motion.div
-        className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-cyan-500/30 rounded-tl-3xl"
+        className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-white/20 rounded-tl-3xl"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
       />
       <motion.div
-        className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-purple-500/30 rounded-tr-3xl"
+        className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-gray-500/30 rounded-tr-3xl"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4 }}
       />
       <motion.div
-        className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-purple-500/30 rounded-bl-3xl"
+        className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-gray-500/30 rounded-bl-3xl"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5 }}
       />
       <motion.div
-        className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-cyan-500/30 rounded-br-3xl"
+        className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-white/20 rounded-br-3xl"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6 }}

@@ -9,7 +9,7 @@ const projects = [
     fullDescription: 'Career Coach is a comprehensive hiring platform designed for educational institutions. Admins can create and manage companies, post jobs, and define complete hiring workflows including eligibility criteria and configurations. The admin dashboard provides detailed insights such as application rate, hit rate, offer letter rate, and CTC analytics.',
     tech: ['React.js', 'MUI', 'Redux', 'REST API'],
     image: '/careercoach.png',
-    color: '#06B6D4',
+    color: '#FFFFFF',
   },
   {
     title: 'Resume AI',
@@ -17,7 +17,7 @@ const projects = [
     fullDescription: 'Resume AI helps students create ATS-friendly resumes with AI-powered content generation. AI assists in generating content for every resume section, including skills recommendations based on the candidate profile and job description.',
     tech: ['React.js', 'TailwindCSS', 'REST API', 'AI'],
     image: '/resume.png',
-    color: '#8B5CF6',
+    color: '#E0E0E0',
   },
   {
     title: 'OXO Website',
@@ -25,7 +25,7 @@ const projects = [
     fullDescription: 'The OXO website was built as a learning project to improve UI development skills with focus on creating clean, modern interface with smooth animations.',
     tech: ['React.js', 'TailwindCSS', 'Styled Components'],
     image: '/oxo.png',
-    color: '#F59E0B',
+    color: '#A0A0A0',
   },
   {
     title: 'Bostani',
@@ -208,17 +208,17 @@ const Projects = () => {
         <div className="sticky top-20 h-auto py-10">
           {/* Header */}
           <motion.div className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
           >
-            <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-white/10"
-              initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: false }}
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-gray-400/10 to-white/10 border border-white/10"
+              initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
             >
-              <FaEye className="text-purple-400" />
-              <span className="text-sm font-medium text-purple-400">My Work</span>
+              <FaEye className="text-gray-400" />
+              <span className="text-sm font-medium text-gray-400">My Work</span>
             </motion.div>
             <h2 className="text-4xl sm:text-5xl font-bold">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Featured</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Projects</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Projects</span>
             </h2>
           </motion.div>
 

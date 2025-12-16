@@ -23,7 +23,7 @@ const TextReveal = ({ children, className = '', delay = 0, staggerDelay = 0.03 }
   };
 
   return (
-    <motion.span className={className} variants={container} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.5 }}>
+    <motion.span className={className} variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
       {words.map((word, index) => (
         <motion.span key={index} variants={child} className="inline-block mr-[0.25em]" style={{ perspective: '1000px' }}>
           {word}

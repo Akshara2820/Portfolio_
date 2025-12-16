@@ -32,11 +32,10 @@ const TiltedCodeCard = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentLine((prev) => (prev < 10 ? prev + 1 : prev));
-    }, 200);
+    // Start with all lines visible immediately
+    setCurrentLine(10);
     const timeout = setTimeout(() => setIsTyping(false), 2500);
-    return () => { clearInterval(interval); clearTimeout(timeout); };
+    return () => { clearTimeout(timeout); };
   }, []);
 
   const codeLines = [
@@ -55,13 +54,13 @@ const TiltedCodeCard = () => {
 
   const highlightCode = (line) => {
     return line
-      .replace(/(import|from|const|return|export|default)/g, '<span class="text-purple-400">$1</span>')
-      .replace(/('.*?')/g, '<span class="text-yellow-300">$1</span>')
-      .replace(/(React|Portfolio)/g, '<span class="text-cyan-400">$1</span>')
-      .replace(/(<\/?[a-z]+)/gi, '<span class="text-green-400">$1</span>')
-      .replace(/(className)=/g, '<span class="text-orange-300">$1</span>=')
-      .replace(/(Hello, I'm )(Akshara)/g, '$1<span class="text-pink-400">$2</span>')
-      .replace(/(Frontend Developer)/g, '<span class="text-blue-300">$1</span>');
+      .replace(/(import|from|const|return|export|default)/g, '<span class="text-gray-400">$1</span>')
+      .replace(/('.*?')/g, '<span class="text-gray-300">$1</span>')
+      .replace(/(React|Portfolio)/g, '<span class="text-white">$1</span>')
+      .replace(/(<\/?[a-z]+)/gi, '<span class="text-gray-500">$1</span>')
+      .replace(/(className)=/g, '<span class="text-gray-400">$1</span>=')
+      .replace(/(Hello, I'm )(Akshara)/g, '$1<span class="text-white">$2</span>')
+      .replace(/(Frontend Developer)/g, '<span class="text-gray-300">$1</span>');
   };
 
   return (
@@ -75,7 +74,7 @@ const TiltedCodeCard = () => {
       >
         {/* Glow effect */}
         <motion.div className="absolute -inset-4 rounded-3xl blur-2xl opacity-50"
-          style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(139,92,246,0.3))' }}
+          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.15), rgba(128,128,128,0.15))' }}
           animate={{ opacity: [0.3, 0.5, 0.3], scale: [0.95, 1, 0.95] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
@@ -98,7 +97,7 @@ const TiltedCodeCard = () => {
             <motion.div className="w-3 h-3 rounded-full bg-yellow-500 cursor-pointer" whileHover={{ scale: 1.3 }} />
             <motion.div className="w-3 h-3 rounded-full bg-green-500 cursor-pointer" whileHover={{ scale: 1.3 }} />
             <div className="flex-1 flex items-center justify-center gap-2">
-              <motion.span className="w-2 h-2 bg-cyan-400 rounded-full" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 2, repeat: Infinity }} />
+              <motion.span className="w-2 h-2 bg-white rounded-full" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 2, repeat: Infinity }} />
               <span className="text-white/40 text-xs">App.jsx</span>
             </div>
           </div>
@@ -123,17 +122,17 @@ const TiltedCodeCard = () => {
 
           {/* Typing cursor */}
           {isTyping && (
-            <motion.div className="absolute bottom-5 right-5 w-2 h-5 bg-cyan-400 rounded-sm"
+            <motion.div className="absolute bottom-5 right-5 w-2 h-5 bg-white rounded-sm"
               animate={{ opacity: [1, 0, 1] }} transition={{ duration: 0.8, repeat: Infinity }}
             />
           )}
         </motion.div>
 
         {/* Decorative elements */}
-        <motion.div className="absolute -top-8 -left-8 w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-500/20 to-transparent rotate-12"
+        <motion.div className="absolute -top-8 -left-8 w-16 h-16 rounded-xl bg-gradient-to-br from-white/10 to-transparent rotate-12"
           animate={{ rotate: [12, 20, 12], scale: [1, 1.1, 1] }} transition={{ duration: 5, repeat: Infinity }}
         />
-        <motion.div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500/20 to-transparent -rotate-12"
+        <motion.div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-xl bg-gradient-to-br from-gray-500/20 to-transparent -rotate-12"
           animate={{ rotate: [-12, -20, -12], scale: [1, 1.1, 1] }} transition={{ duration: 6, repeat: Infinity }}
         />
       </motion.div>

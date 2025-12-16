@@ -26,7 +26,7 @@ const testimonials = [
   },
 ];
 
-const colors = ['#06B6D4', '#8B5CF6', '#F59E0B'];
+const colors = ['#FFFFFF', '#E0E0E0', '#A0A0A0'];
 
 const TestimonialCard = ({ testimonial, index }) => {
   const color = colors[index % colors.length];
@@ -41,7 +41,7 @@ const TestimonialCard = ({ testimonial, index }) => {
       initial={{ opacity: 0, y: 50, rotateX: -10 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
       transition={{ duration: 0.7, delay: index * 0.15, type: 'spring' }}
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.3 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{ y: -10, scale: 1.02, borderColor: `${color}40` }}
@@ -71,7 +71,7 @@ const TestimonialCard = ({ testimonial, index }) => {
       <motion.div className="absolute -top-3 -left-3 w-14 h-14 rounded-2xl flex items-center justify-center border"
         style={{ backgroundColor: `${color}15`, borderColor: `${color}30` }}
         initial={{ scale: 0, rotate: -180 }} whileInView={{ scale: 1, rotate: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.15 + 0.3, type: 'spring' }} viewport={{ once: false }}
+        transition={{ duration: 0.5, delay: index * 0.15 + 0.3, type: 'spring' }} viewport={{ once: true }}
         whileHover={{ scale: 1.1, rotate: 10 }}
       >
         <FaQuoteLeft style={{ color }} className="text-xl" />
@@ -80,7 +80,7 @@ const TestimonialCard = ({ testimonial, index }) => {
       {/* LinkedIn badge */}
       <motion.a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
         className="absolute -top-3 -right-3 w-12 h-12 rounded-xl bg-[#0A66C2] flex items-center justify-center shadow-lg"
-        initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ duration: 0.4, delay: index * 0.15 + 0.4, type: 'spring' }} viewport={{ once: false }}
+        initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ duration: 0.4, delay: index * 0.15 + 0.4, type: 'spring' }} viewport={{ once: true }}
         whileHover={{ scale: 1.15, rotate: 5 }}
       >
         <FaLinkedin className="text-white text-xl" />
@@ -93,7 +93,7 @@ const TestimonialCard = ({ testimonial, index }) => {
             initial={{ opacity: 0, scale: 0, rotate: -180 }} 
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ delay: index * 0.15 + 0.5 + i * 0.1, type: 'spring' }} 
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             whileHover={{ scale: 1.3, rotate: 20 }}
           >
             <FaStar className="text-yellow-400 text-sm" />
@@ -160,20 +160,20 @@ const Testimonials = () => {
     <section id="testimonials" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-24 text-white">
       {/* Header */}
       <motion.div className="text-center mb-16"
-        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
       >
-        <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10"
-          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: false }}
+        <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-white/10 to-gray-400/10 border border-white/10"
+          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
         >
           <FaStar className="text-yellow-400" />
-          <span className="text-sm font-medium text-cyan-400">What People Say</span>
+          <span className="text-sm font-medium text-white">What People Say</span>
         </motion.div>
         <h2 className="text-4xl sm:text-5xl font-bold mb-4">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Client</span>{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Testimonials</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Testimonials</span>
         </h2>
         <motion.p className="text-white/50 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: false }}
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: true }}
         >
           Feedback from colleagues and collaborators I've had the pleasure to work with
         </motion.p>

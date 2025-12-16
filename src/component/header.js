@@ -36,7 +36,7 @@ function Header() {
         <motion.header 
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
                 scrolled 
-                    ? 'backdrop-blur-xl bg-[#0b0b0b]/80 border-b border-white/10 shadow-lg shadow-black/20' 
+                    ? 'backdrop-blur-xl bg-background/80 border-b border-white/10 shadow-lg shadow-black/20' 
                     : 'backdrop-blur-md bg-transparent border-b border-transparent'
             }`}
             initial={{ y: -100 }}
@@ -46,21 +46,18 @@ function Header() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between">
                 <motion.div className='flex gap-3 items-center group cursor-pointer' whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <div className="relative">
-                        <motion.div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"
-                            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                        />
+                        <div className="absolute inset-0 bg-white/20 rounded-lg blur opacity-30 group-hover:opacity-50 transition duration-300" />
                         <svg className="relative w-9 h-9 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
                         </svg>
                     </div>
-                    <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 tracking-tight">AM</div>
+                    <div className="text-2xl font-bold text-white tracking-tight">AM</div>
                 </motion.div>
 
                 <nav className="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-sm rounded-full p-1.5 border border-white/10">
                     {navItems.map((item, index) => (
                         <motion.a key={item.name} href={item.href}
-                            className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white' : 'text-gray-400 hover:text-white'}`}
+                            className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white' : 'text-text-muted hover:text-white'}`}
                             initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}
                             whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                         >
@@ -70,14 +67,11 @@ function Header() {
                             <span className="relative z-10">{item.name}</span>
                         </motion.a>
                     ))}
-                    <motion.a href="#contact" className="relative ml-2 px-5 py-2 text-sm font-medium text-white rounded-full overflow-hidden group"
+                    <motion.a href="#contact" className="relative ml-2 px-5 py-2 text-sm font-medium text-black rounded-full overflow-hidden group"
                         initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
                         whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                     >
-                        <motion.div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600"
-                            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-                            transition={{ duration: 3, repeat: Infinity }} style={{ backgroundSize: '200% 200%' }}
-                        />
+                        <div className="absolute inset-0 bg-white" />
                         <span className="relative z-10">Contact</span>
                     </motion.a>
                 </nav>
@@ -101,18 +95,18 @@ function Header() {
 
             <AnimatePresence>
                 {menuOpen && (
-                    <motion.div className="md:hidden absolute top-full left-0 w-full bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-2"
+                    <motion.div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-2"
                         initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                         {navItems.map((item, index) => (
                             <motion.a key={item.name} href={item.href}
-                                className={`block px-4 py-3 font-medium rounded-lg transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white bg-white/10' : 'text-gray-400 hover:bg-white/10 hover:text-white'}`}
+                                className={`block px-4 py-3 font-medium rounded-lg transition-all duration-300 ${activeSection === item.href.slice(1) ? 'text-white bg-white/10' : 'text-text-muted hover:bg-white/10 hover:text-white'}`}
                                 onClick={toggleMenu} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}
                             >
                                 {item.name}
                             </motion.a>
                         ))}
-                        <motion.a href="#contact" className="block mt-4 px-4 py-3 text-center text-white font-medium bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg" onClick={toggleMenu}
+                        <motion.a href="#contact" className="block mt-4 px-4 py-3 text-center text-black font-medium bg-white rounded-lg" onClick={toggleMenu}
                             initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
                         >
                             Contact

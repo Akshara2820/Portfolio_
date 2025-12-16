@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { FaCode, FaMobileAlt, FaRocket, FaLightbulb, FaHeart, FaCoffee, FaGamepad } from 'react-icons/fa';
+import { FaCode, FaMobileAlt, FaRocket, FaLightbulb, FaHeart, FaCoffee, FaMedal } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import TiltedCodeCard from './code';
 
 const highlights = [
-  { number: '3+', label: 'Years Experience', color: '#06B6D4' },
-  { number: '50+', label: 'Projects Completed', color: '#8B5CF6' },
-  { number: '20+', label: 'Happy Clients', color: '#EC4899' },
-  { number: '99%', label: 'Client Satisfaction', color: '#F59E0B' },
+  { number: '3+', label: 'Years Experience', color: '#FFFFFF' },
+  { number: '50+', label: 'Projects Completed', color: '#E0E0E0' },
+  { number: '20+', label: 'Happy Clients', color: '#C0C0C0' },
+  { number: '99%', label: 'Client Satisfaction', color: '#A0A0A0' },
 ];
 
 const whatIDo = [
@@ -16,7 +17,7 @@ const whatIDo = [
     desc: 'Building modern, scalable web apps',
     details: 'I specialize in building robust web applications using React.js, Next.js, and modern JavaScript. From single-page apps to complex enterprise solutions, I focus on writing clean, maintainable code that scales.',
     skills: ['React.js', 'Next.js', 'TypeScript', 'Redux'],
-    color: '#06B6D4' 
+    color: '#FFFFFF' 
   },
   { 
     icon: FaMobileAlt, 
@@ -24,7 +25,7 @@ const whatIDo = [
     desc: 'Pixel-perfect on all devices',
     details: 'Every website I build looks stunning on any screen size. I use mobile-first approach with Tailwind CSS and modern CSS techniques to ensure seamless experiences across desktop, tablet, and mobile.',
     skills: ['Tailwind CSS', 'CSS Grid', 'Flexbox', 'Mobile-First'],
-    color: '#8B5CF6' 
+    color: '#E0E0E0' 
   },
   { 
     icon: FaRocket, 
@@ -32,7 +33,7 @@ const whatIDo = [
     desc: 'Lightning-fast load times',
     details: 'Speed matters! I optimize every aspect of web performance - from code splitting and lazy loading to image optimization and caching strategies. Your users deserve fast, smooth experiences.',
     skills: ['Code Splitting', 'Lazy Loading', 'SEO', 'Core Web Vitals'],
-    color: '#F59E0B' 
+    color: '#C0C0C0' 
   },
   { 
     icon: FaLightbulb, 
@@ -40,43 +41,43 @@ const whatIDo = [
     desc: 'Creative technical solutions',
     details: 'Complex problems excite me! I love diving deep into challenging requirements and finding elegant solutions. Whether it\'s debugging tricky issues or architecting new features, I bring creativity and logic together.',
     skills: ['Debugging', 'Architecture', 'API Integration', 'Testing'],
-    color: '#EC4899' 
+    color: '#A0A0A0' 
   },
 ];
 
 const funFacts = [
-  { icon: FaCoffee, text: '500+ cups of coffee consumed', color: '#F59E0B' },
-  { icon: FaHeart, text: 'Love creating smooth animations', color: '#EC4899' },
-  { icon: FaGamepad, text: 'Gamer in free time', color: '#8B5CF6' },
+  { icon: FaCoffee, text: '500+ cups of coffee consumed', color: '#FFFFFF' },
+  { icon: FaHeart, text: 'Love creating smooth animations', color: '#C0C0C0' },
+  { icon: FaMedal, text: 'National medal in 100m sprint', color: '#A0A0A0' },
 ];
 
 function About() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="about" className="relative max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-20 text-white overflow-hidden">
+    <section id="about" className="relative max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 py-20 text-white">
       {/* Background effects */}
-      <motion.div className="absolute top-1/4 -right-32 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px]"
+      <motion.div className="absolute top-1/4 -right-32 w-[400px] h-[400px] bg-white/5 rounded-full blur-[120px]"
         animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }} transition={{ duration: 10, repeat: Infinity }}
       />
-      <motion.div className="absolute bottom-1/4 -left-32 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[120px]"
+      <motion.div className="absolute bottom-1/4 -left-32 w-[300px] h-[300px] bg-gray-500/10 rounded-full blur-[120px]"
         animate={{ scale: [1.2, 1, 1.2] }} transition={{ duration: 12, repeat: Infinity }}
       />
 
       <div className="relative z-10">
         {/* Header */}
         <motion.div className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
         >
-          <motion.span className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-white/10"
-            initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: false }}
+          <motion.span className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-white/5 border border-white/20"
+            initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
           >
-            <motion.span className="w-2 h-2 bg-cyan-400 rounded-full" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-            <span className="text-sm font-medium text-cyan-400">Get To Know Me</span>
+            <motion.span className="w-2 h-2 bg-white rounded-full" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+            <span className="text-sm font-medium text-white">Get To Know Me</span>
           </motion.span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             <span className="text-white">About </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">Me</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Me</span>
           </h2>
         </motion.div>
 
@@ -84,22 +85,20 @@ function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Left - Profile Card */}
           <motion.div className="lg:col-span-4"
-            initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+            initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
           >
-            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 overflow-hidden h-full">
+            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 overflow-hidden">
               {/* Profile image */}
               <div className="relative w-32 h-32 mx-auto mb-4">
-                <motion.div className="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500"
-                  animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                />
-                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#0f0f0f]">
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-white/30 to-gray-500/30" />
+                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/20">
                   <img src="/pic3.jpg" alt="Akshara" className="w-full h-full object-cover" />
                 </div>
               </div>
 
               <div className="text-center mb-4">
                 <h3 className="text-xl font-bold text-white">Akshara Mishra</h3>
-                <p className="text-cyan-400 text-sm">Frontend Developer</p>
+                <p className="text-gray-400 text-sm">Frontend Developer</p>
               </div>
 
               {/* Quick bio */}
@@ -112,7 +111,7 @@ function About() {
                 {funFacts.map((fact, index) => (
                   <motion.div key={index} className="flex items-center gap-3 p-2 rounded-lg bg-white/5"
                     initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }} viewport={{ once: false }}
+                    transition={{ delay: index * 0.1 }} viewport={{ once: true }}
                     whileHover={{ x: 5, backgroundColor: 'rgba(255,255,255,0.1)' }}
                   >
                     <fact.icon className="text-sm" style={{ color: fact.color }} />
@@ -121,27 +120,38 @@ function About() {
                 ))}
               </div>
             </div>
+
+            {/* Code Preview Card */}
+            <motion.div 
+              className="mt-6"
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.6, delay: 0.3 }} 
+              viewport={{ once: true }}
+            >
+              <TiltedCodeCard />
+            </motion.div>
           </motion.div>
 
           {/* Right - Stats & What I Do */}
           <div className="lg:col-span-8 space-y-6">
             {/* Stats row */}
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4"
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: false }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
             >
               {highlights.map((stat, index) => (
                 <motion.div key={index}
                   className="relative p-4 rounded-xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 text-center group overflow-hidden"
                   whileHover={{ scale: 1.05, borderColor: `${stat.color}50` }}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }} viewport={{ once: false }}
+                  transition={{ delay: index * 0.1 }} viewport={{ once: true }}
                 >
                   <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{ background: `radial-gradient(circle at center, ${stat.color}15, transparent)` }}
                   />
                   <motion.div className="text-2xl sm:text-3xl font-bold mb-1" style={{ color: stat.color }}
                     initial={{ scale: 0 }} whileInView={{ scale: 1 }}
-                    transition={{ type: 'spring', delay: index * 0.1 + 0.3 }} viewport={{ once: false }}
+                    transition={{ type: 'spring', delay: index * 0.1 + 0.3 }} viewport={{ once: true }}
                   >
                     {stat.number}
                   </motion.div>
@@ -152,10 +162,10 @@ function About() {
 
             {/* What I Do - Interactive cards */}
             <motion.div className="p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10"
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: false }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} viewport={{ once: true }}
             >
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <span className="w-8 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full" />
+                <span className="w-8 h-1 bg-gradient-to-r from-white to-gray-500 rounded-full" />
                 What I Do
               </h3>
 
@@ -214,28 +224,28 @@ function About() {
 
             {/* Journey timeline - improved */}
             <motion.div className="p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10"
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: false }}
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} viewport={{ once: true }}
             >
               <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                <span className="w-8 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
+                <span className="w-8 h-1 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full" />
                 My Journey
               </h3>
 
               <div className="relative px-4">
                 {/* Timeline line */}
-                <div className="absolute top-3 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
+                <div className="absolute top-3 left-4 right-4 h-0.5 bg-gradient-to-r from-white via-gray-400 to-gray-600" />
                 
                 {/* Timeline items */}
                 <div className="flex justify-between">
                   {[
-                    { year: '2021', event: 'Started Journey', color: '#06B6D4' },
-                    { year: '2022', event: 'First Job', color: '#8B5CF6' },
-                    { year: '2024', event: 'Current Role', color: '#EC4899' },
-                    { year: 'Now', event: 'Growing', color: '#F59E0B' },
+                    { year: '2021', event: 'Started Journey', color: '#FFFFFF' },
+                    { year: '2022', event: 'First Job', color: '#E0E0E0' },
+                    { year: '2024', event: 'Current Role', color: '#C0C0C0' },
+                    { year: 'Now', event: 'Growing', color: '#A0A0A0' },
                   ].map((item, index) => (
                     <motion.div key={index} className="relative text-center flex flex-col items-center"
                       initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.15 }} viewport={{ once: false }}
+                      transition={{ delay: index * 0.15 }} viewport={{ once: true }}
                     >
                       {/* Dot */}
                       <motion.div 

@@ -1,0 +1,25 @@
+.scrolling-tags-marquee {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: scroll-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrolling-tags-marquee span {
+  flex-shrink: 0;
+}
+
+.scrolling-tags-marquee span:hover {
+  transform: scale(1.1);
+}

@@ -1,20 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [cursorText, setCursorText] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const mousePositionRef = useRef({ x: 0, y: 0 });
 
   const springConfig = { damping: 25, stiffness: 300 };
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
 
+  // Use event delegation instead of attaching listeners to each element
+  const handleMouseOver = useCallback((e) => {
+    const target = e.target.closest('a, button, [data-cursor="pointer"], input, textarea');
+    if (target) {
+      setIsHovering(true);
+      setCursorText(target.getAttribute('data-cursor-text') || '');
+    }
+  }, []);
+
+  const handleMouseOut = useCallback((e) => {
+    const target = e.target.closest('a, button, [data-cursor="pointer"], input, textarea');
+    if (target) {
+      setIsHovering(false);
+      setCursorText('');
+    }
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mousePositionRef.current = { x: e.clientX, y: e.clientY };
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
       setIsVisible(true);
@@ -25,29 +42,15 @@ const CustomCursor = () => {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    const handleElementHover = () => {
-      const interactiveElements = document.querySelectorAll('a, button, [data-cursor="pointer"], input, textarea');
-      interactiveElements.forEach((el) => {
-        el.addEventListener('mouseenter', () => {
-          setIsHovering(true);
-          setCursorText(el.getAttribute('data-cursor-text') || '');
-        });
-        el.addEventListener('mouseleave', () => {
-          setIsHovering(false);
-          setCursorText('');
-        });
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     document.body.addEventListener('mouseleave', handleMouseLeave);
     document.body.addEventListener('mouseenter', handleMouseEnter);
-    handleElementHover();
-
-    const observer = new MutationObserver(handleElementHover);
-    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Event delegation - single listener on document
+    document.addEventListener('mouseover', handleMouseOver, { passive: true });
+    document.addEventListener('mouseout', handleMouseOut, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -55,9 +58,10 @@ const CustomCursor = () => {
       window.removeEventListener('mouseup', handleMouseUp);
       document.body.removeEventListener('mouseleave', handleMouseLeave);
       document.body.removeEventListener('mouseenter', handleMouseEnter);
-      observer.disconnect();
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, handleMouseOver, handleMouseOut]);
 
   // Hide on mobile/touch devices
   if (typeof window !== 'undefined' && 'ontouchstart' in window) {
@@ -96,7 +100,7 @@ const CustomCursor = () => {
         transition={{ duration: 0.2, ease: "easeOut" }}
       >
         <div
-          className="relative -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-cyan-400/50"
+          className="relative -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/50"
           style={{
             width: isHovering ? 60 : 40,
             height: isHovering ? 60 : 40,
@@ -111,18 +115,7 @@ const CustomCursor = () => {
         </div>
       </motion.div>
 
-      {/* Trailing particles */}
-      {isHovering && (
-        <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[9997]"
-          style={{ x: mousePosition.x, y: mousePosition.y }}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: [0, 1.5, 0], opacity: [0.5, 0.2, 0] }}
-          transition={{ duration: 0.6, repeat: Infinity }}
-        >
-          <div className="relative -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-cyan-400/20 blur-xl" />
-        </motion.div>
-      )}
+      {/* Removed trailing particles for performance */}
     </>
   );
 };

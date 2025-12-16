@@ -16,13 +16,17 @@ code {
 @tailwind components;
 @tailwind utilities;
 
+/* Import Electric Mint Theme */
+@import './theme.css';
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Poppins';
-  background: #0b0b0b;
+  background: var(--color-background);
+  color: var(--color-text-primary);
   overflow-x: hidden;
 }
 
@@ -63,8 +67,8 @@ body {
   left: 0;
   width: 14px;
   height: 14px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #00ffff44;
+  background: var(--color-text-primary);
+  border: 2px solid var(--color-primary-glow);
   border-radius: 9999px;
   z-index: 9999;
   transform: translate(-50%, -50%);
@@ -75,13 +79,13 @@ body {
 #custom-cursor.active {
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid #ffffff66;
+  background: var(--color-primary-subtle);
+  border: 2px solid var(--color-primary);
 }
 
 /* Animated gradient background */
 .gradient-bg {
-  background: linear-gradient(135deg, #0b0b0b 0%, #111827 50%, #0b0b0b 100%);
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-surface) 50%, var(--color-background) 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -109,7 +113,7 @@ body {
 
 /* Glow effect */
 .glow {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 20px var(--color-primary-glow), 0 0 40px var(--color-primary-subtle);
 }
 
 .glow-text {
@@ -118,8 +122,8 @@ body {
 
 /* Pulse animation */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(6, 182, 212, 0.4); }
-  50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.4); }
+  0%, 100% { box-shadow: 0 0 5px var(--color-primary-glow); }
+  50% { box-shadow: 0 0 20px var(--color-primary), 0 0 30px var(--color-primary-glow); }
 }
 
 .pulse-glow {
@@ -129,8 +133,8 @@ body {
 /* Gradient border animation */
 .gradient-border {
   position: relative;
-  background: linear-gradient(#0b0b0b, #0b0b0b) padding-box,
-              linear-gradient(135deg, #06b6d4, #8b5cf6, #06b6d4) border-box;
+  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
+              linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-primary)) border-box;
   border: 2px solid transparent;
   background-size: 100% 100%, 200% 200%;
   animation: borderGradient 4s linear infinite;
@@ -243,19 +247,21 @@ body {
 }
 
 /* Glowing text effect */
-.glow-text-cyan {
-  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5), 0 0 20px rgba(6, 182, 212, 0.3), 0 0 30px rgba(6, 182, 212, 0.2);
+.glow-text-cyan,
+.glow-text-primary {
+  text-shadow: 0 0 10px var(--color-primary-glow), 0 0 20px var(--color-primary-glow), 0 0 30px var(--color-primary-subtle);
 }
 
-.glow-text-purple {
-  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.2);
+.glow-text-purple,
+.glow-text-secondary {
+  text-shadow: 0 0 10px var(--color-secondary-glow), 0 0 20px var(--color-secondary-glow), 0 0 30px var(--color-secondary-subtle);
 }
 
 /* Animated border gradient */
 .animated-border {
   position: relative;
-  background: linear-gradient(#0b0b0b, #0b0b0b) padding-box,
-              linear-gradient(var(--angle, 0deg), #06b6d4, #8b5cf6, #ec4899, #06b6d4) border-box;
+  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
+              linear-gradient(var(--angle, 0deg), var(--color-primary), var(--color-secondary), #ec4899, var(--color-primary)) border-box;
   border: 2px solid transparent;
   animation: rotateBorder 4s linear infinite;
 }
@@ -357,12 +363,14 @@ body {
 .stagger-5 { animation-delay: 0.5s; }
 
 /* Neon glow effect */
-.neon-cyan {
-  box-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4, 0 0 20px #06b6d4, 0 0 40px #06b6d4;
+.neon-cyan,
+.neon-primary {
+  box-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary), 0 0 20px var(--color-primary), 0 0 40px var(--color-primary);
 }
 
-.neon-purple {
-  box-shadow: 0 0 5px #8b5cf6, 0 0 10px #8b5cf6, 0 0 20px #8b5cf6, 0 0 40px #8b5cf6;
+.neon-purple,
+.neon-secondary {
+  box-shadow: 0 0 5px var(--color-secondary), 0 0 10px var(--color-secondary), 0 0 20px var(--color-secondary), 0 0 40px var(--color-secondary);
 }
 
 .neon-pink {

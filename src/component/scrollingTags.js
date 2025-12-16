@@ -1,69 +1,50 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import './scrollingTags.css';
 
 const ScrollingTags = () => {
   const tags = [
-    { text: 'Frontend', color: '#06B6D4' },
-    { text: 'React.js', color: '#61DAFB' },
-    { text: 'Next.js', color: '#ffffff' },
-    { text: 'JavaScript', color: '#F7DF1E' },
-    { text: 'TypeScript', color: '#3178C6' },
-    { text: 'UI/UX', color: '#EC4899' },
-    { text: 'Clean Code', color: '#10B981' },
-    { text: 'Performance', color: '#F59E0B' },
-    { text: 'Web Apps', color: '#8B5CF6' },
-    { text: 'Tailwind', color: '#38BDF8' },
-    { text: 'MUI', color: '#007FFF' },
-    { text: 'Bootstrap', color: '#7952B3' },
-    { text: 'API Integration', color: '#00D084' },
-    { text: 'Git', color: '#F05032' },
-    { text: 'CI/CD', color: '#06B6D4' },
-    { text: 'Mentor', color: '#EC4899' },
-    { text: 'Community', color: '#8B5CF6' },
-    { text: 'Learning', color: '#F59E0B' },
+    { text: 'Frontend', color: '#FFFFFF' },
+    { text: 'React.js', color: '#E0E0E0' },
+    { text: 'Next.js', color: '#FFFFFF' },
+    { text: 'JavaScript', color: '#C0C0C0' },
+    { text: 'TypeScript', color: '#A0A0A0' },
+    { text: 'UI/UX', color: '#D0D0D0' },
+    { text: 'Clean Code', color: '#B0B0B0' },
+    { text: 'Performance', color: '#E0E0E0' },
+    { text: 'Web Apps', color: '#909090' },
+    { text: 'Tailwind', color: '#C0C0C0' },
+    { text: 'MUI', color: '#A0A0A0' },
+    { text: 'Bootstrap', color: '#808080' },
   ];
 
-  const duplicatedTags = [...tags, ...tags, ...tags];
+  // Only duplicate twice for seamless loop
+  const duplicatedTags = [...tags, ...tags];
 
   return (
-    <div className="relative w-full overflow-hidden py-6 bg-gradient-to-r from-[#080808] via-[#0f0f0f] to-[#080808] border-y border-white/5 mt-0 lg:-mt-[80px] -rotate-[3deg]">
+    <div className="relative w-full overflow-hidden py-6 bg-gradient-to-r from-black via-[#0a0a0a] to-black border-y border-white/10 mt-0 lg:-mt-[80px] -rotate-[3deg]">
       {/* Gradient overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-      {/* Animated marquee */}
-      <motion.div
-        className="flex items-center gap-8 whitespace-nowrap"
-        animate={{ x: [0, -33.33 * tags.length * 8] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 40, ease: 'linear' } }}
-      >
+      {/* CSS-only marquee for better performance */}
+      <div className="scrolling-tags-marquee">
         {duplicatedTags.map((tag, idx) => (
           <React.Fragment key={idx}>
-            <motion.span
-              className="text-base sm:text-lg font-medium cursor-default transition-all duration-300"
+            <span
+              className="text-base sm:text-lg font-medium cursor-default transition-colors duration-300 hover:scale-110"
               style={{ color: `${tag.color}80` }}
-              whileHover={{ scale: 1.2, color: tag.color }}
             >
               {tag.text}
-            </motion.span>
-            <motion.span
-              className="text-lg"
-              style={{ color: `${tags[idx % tags.length].color}40` }}
-              animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-              transition={{ duration: 4, repeat: Infinity, delay: idx * 0.1 }}
-            >
+            </span>
+            <span className="text-lg" style={{ color: `${tags[idx % tags.length].color}40` }}>
               ✦
-            </motion.span>
+            </span>
           </React.Fragment>
         ))}
-      </motion.div>
+      </div>
 
-      {/* Subtle glow line */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
-        animate={{ opacity: [0.3, 0.6, 0.3] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
+      {/* Static glow line */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
     </div>
   );
 };
