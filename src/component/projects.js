@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaArrowRight } from 'react-icons/fa';
+import {FaExternalLinkAlt, FaTimes, FaArrowRight } from 'react-icons/fa';
 
 const projects = [
   {

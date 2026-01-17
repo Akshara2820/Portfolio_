@@ -30,7 +30,7 @@ const Header = () => {
             <div className={`max-w-[1600px] mx-auto flex items-center justify-between p-4 rounded-full transition-all duration-300 ${scrolled ? 'bg-surface/60 backdrop-blur-xl border border-white/5 shadow-lg' : 'bg-transparent'
                 }`}>
                 <div className="flex items-center gap-2">
-                    <a href="#" className="text-xl font-display font-bold tracking-tight text-white pl-2">
+                    <a href="/" className="text-xl font-display font-bold tracking-tight text-white pl-2">
                         Am.
                     </a>
                 </div>

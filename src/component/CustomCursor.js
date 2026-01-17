@@ -20,7 +20,7 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener('mousemove', moveCursor);
     };
-  }, []);
+  }, [cursorX, cursorY]);
 
   return (
     <>
