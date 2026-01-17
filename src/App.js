@@ -9,8 +9,9 @@ import About from './component/about';
 import Skills from './component/skills';
 import Experience from './component/experience';
 import Awards from './component/awards';
+import Testimonials from './component/testimonials';
 import Projects from './component/projects';
-import Contact from './component/footer'; // Assuming Footer is Contact/Footer
+import Contact from './component/footer';
 import CustomCursor from './component/CustomCursor';
 
 // Minimal Loading Screen
@@ -49,19 +50,25 @@ function App() {
     <>
       <CustomCursor />
 
+      {/* Global Background Elements */}
+      <div className="fixed inset-0 bg-background -z-50" />
+      <div className="fixed inset-0 bg-noise opacity-[0.03] pointer-events-none z-[-40]" />
+      <div className="fixed top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none z-[-40]" />
+
       <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
       {!isLoading && (
-        <main className="bg-background min-h-screen selection:bg-accent-glow selection:text-white">
+        <main className="min-h-screen selection:bg-accent selection:text-white">
           <Header />
-          <div className="pt-24 px-4 md:px-12 lg:px-24 max-w-[1600px] mx-auto space-y-32 pb-24">
+          <div className="pt-24 px-4 md:px-12 lg:px-24 max-w-[1600px] mx-auto space-y-32 pb-24 relative">
             <HeroSection />
             <Projects />
             <Skills />
             <Experience />
             <Awards />
+            <Testimonials />
             <About />
             <Contact />
           </div>

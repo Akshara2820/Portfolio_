@@ -1,47 +1,101 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import Tilt from 'react-parallax-tilt';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaArrowRight } from 'react-icons/fa';
 
 const projects = [
   {
     title: 'Career Coach',
-    shortDescription: 'Hiring platform with admin-managed workflows.',
+    category: 'Platform',
+    shortDescription: 'Comprehensive hiring dashboard for educational institutions.',
     fullDescription: 'Career Coach is a comprehensive hiring platform designed for educational institutions. Admins can create and manage companies, post jobs, and define complete hiring workflows including eligibility criteria and configurations. The admin dashboard provides detailed insights such as application rate, hit rate, offer letter rate, and CTC analytics.',
     tech: ['React', 'Redux', 'MUI', 'REST API'],
     image: '/careercoach.png',
-    link: '#',
-    github: '#'
+    link: 'https://admin.mastersunion.in/',
+    github: '#',
+    style: 'dark'
   },
   {
     title: 'Resume AI',
-    shortDescription: 'AI-powered resume builder.',
+    category: 'AI Tool',
+    shortDescription: 'AI-powered ATS resume builder.',
     fullDescription: 'Resume AI helps students create ATS-friendly resumes with AI-powered content generation. AI assists in generating content for every resume section, including skills recommendations based on the candidate profile and job description.',
-    tech: ['React', 'Tailwind', 'OpenAI API'],
+    tech: ['React', 'Tailwind', 'OpenAI'],
     image: '/resume.png',
-    link: '#',
-    github: '#'
+    link: 'https://www.resume.mastersunion.org/login',
+    github: '#',
+    style: 'color'
   },
   {
     title: 'OXO Design',
-    shortDescription: 'Experimental UI playground.',
+    category: 'Experimental',
+    shortDescription: 'Experimental UI playground and design system.',
     fullDescription: 'The OXO website was built as a learning project to improve UI development skills with focus on creating clean, modern interface with smooth animations and complex layout transitions.',
-    tech: ['Framer Motion', 'React', 'GSAP'],
+    tech: ['Framer', 'GSAP', 'React'],
     image: '/oxo.png',
-    link: '#',
-    github: '#'
+    link: 'https://oxo-website-sandy.vercel.app/',
+    github: '#',
+    style: 'dark'
   },
   {
-    title: 'Bostani',
-    shortDescription: 'E-commerce interface.',
-    fullDescription: 'Bostani is my first project, built as a dummy website to learn and practice React.js fundamentals, including component-based architecture, state management, and responsive design principles.',
-    tech: ['React', 'Tailwind', 'Context API'],
-    image: '/boostani.png',
-    link: '#',
-    github: '#'
+    title: "Masters' Union",
+    category: 'EdTech',
+    shortDescription: 'Managed the Masters\' Union website.',
+    fullDescription: 'Managed the Masters\' Union website, ensuring a seamless information flow and user experience for a new-age business school.',
+    tech: ['Web Management', 'React'],
+    image: '/mastersunion.png',
+    link: 'https://mastersunion.org/',
+    github: '#',
+    style: 'dark'
   },
 ];
 
-const ProjectDetail = ({ project, onClose }) => {
+const ProjectCard = ({ project, onClick }) => {
+  return (
+    <Tilt
+      tiltMaxAngleX={2}
+      tiltMaxAngleY={2}
+      scale={1.01}
+      transitionSpeed={1000}
+      className="group relative overflow-hidden rounded-[2rem] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 min-h-[400px] md:min-h-[450px] bg-[#161617]"
+    >
+      <div onClick={() => onClick(project)} className="absolute inset-0 flex flex-col p-8 md:p-10">
+        {/* Text Section */}
+        <div className="relative z-20 mb-6 md:mb-8 pointer-events-none">
+          <span className="text-primary/40 text-xs font-semibold tracking-widest uppercase mb-2 block">
+            {project.category}
+          </span>
+          <h3 className="text-3xl md:text-4xl font-display font-semibold text-white mb-3 tracking-tight">
+            {project.title}
+          </h3>
+          <p className="text-primary/60 text-base md:text-lg max-w-md font-medium leading-relaxed">
+            {project.shortDescription}
+          </p>
+        </div>
+
+        {/* Image Section - Floating Mockup Style */}
+        <div className="relative flex-1 w-full rounded-t-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-transform duration-500 group-hover:scale-[1.02] group-hover:translate-y-[-5px]">
+          <div className="absolute inset-0 bg-[#2C2C2E] rounded-t-xl">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+            />
+          </div>
+          {/* Gloss Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        </div>
+
+        {/* Arrow Icon */}
+        <div className="absolute top-8 right-8 z-30 bg-white/10 p-3 rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+          <FaArrowRight className="text-white text-lg -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+        </div>
+      </div>
+    </Tilt>
+  );
+};
+
+const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
 
   return (
@@ -49,72 +103,58 @@ const ProjectDetail = ({ project, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 md:py-12 bg-background/80 backdrop-blur-xl"
+      className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8 bg-black/80 backdrop-blur-2xl"
       onClick={onClose}
     >
       <motion.div
-        layoutId={`project-${project.title}`}
-        className="w-full max-w-5xl h-full max-h-[90vh] bg-[#0A0A0A] border border-white/10 rounded-2xl overflow-hidden flex flex-col md:flex-row relative shadow-2xl"
+        layoutId={`card-${project.title}`}
+        className="w-full max-w-5xl bg-[#1C1C1E] rounded-[2rem] overflow-hidden shadow-2xl relative max-h-[85vh] flex flex-col md:flex-row"
         onClick={(e) => e.stopPropagation()}
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-black/80 transition-all border border-white/10"
+          className="absolute top-6 right-6 z-50 w-10 h-10 bg-[#2C2C2E] rounded-full text-white/50 hover:text-white flex items-center justify-center transition-colors"
         >
-          <FaTimes />
+          <FaTimes size={18} />
         </button>
 
-        {/* Image Section */}
-        <div className="w-full md:w-1/2 h-[40vh] md:h-full bg-white/5 relative">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent md:bg-gradient-to-r" />
+        {/* Image Side */}
+        <div className="w-full md:w-7/12 bg-[#000] relative">
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         </div>
 
-        {/* Content Section */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-display font-medium text-white mb-2">{project.title}</h2>
-            <p className="text-primary/60 text-lg mb-8">{project.shortDescription}</p>
+        {/* Content Side */}
+        <div className="w-full md:w-5/12 p-8 md:p-10 flex flex-col overflow-y-auto bg-[#1C1C1E] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+          <div className="mb-8">
+            <span className="text-accent text-sm font-bold tracking-widest uppercase mb-4 block">{project.category}</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4 tracking-tight">{project.title}</h2>
+            <p className="text-primary/80 leading-relaxed text-base font-medium">
+              {project.fullDescription}
+            </p>
+          </div>
 
-            <div className="flex flex-wrap gap-2 mb-8">
+          <div className="mt-auto">
+            <h4 className="text-xs text-primary/40 uppercase tracking-widest font-bold mb-4">Core Technologies</h4>
+            <div className="flex flex-wrap gap-2 mb-6">
               {project.tech.map((tech) => (
-                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-primary/80">
+                <span key={tech} className="px-4 py-2 bg-[#2C2C2E] rounded-full text-sm font-medium text-white/90">
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div className="prose prose-invert max-w-none text-primary/70 mb-12 leading-relaxed">
-              <p>{project.fullDescription}</p>
-            </div>
-
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4">
               <a
                 href={project.link}
-                className="flex-1 py-4 bg-white text-black font-medium rounded-full text-center hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 bg-white text-black font-bold text-lg rounded-xl text-center hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
               >
-                <FaExternalLinkAlt className="text-sm" /> Live Site
+                <FaExternalLinkAlt size={16} /> Open Project
               </a>
-              <a
-                href={project.github}
-                className="flex-1 py-4 border border-white/10 text-white font-medium rounded-full text-center hover:bg-white/5 transition-colors flex items-center justify-center gap-2"
-              >
-                <FaGithub className="text-lg" /> Source
-              </a>
+
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -125,41 +165,31 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="mb-12 border-b border-white/5 pb-4 flex justify-between items-end">
-        <h2 className="text-3xl font-display font-medium">Selected Work</h2>
-        <span className="text-sm text-primary/40 font-mono">Click to view details</span>
-      </div>
+    <section id="projects" className="py-24 md:py-32 relative">
+      <div className="max-w-[1600px] mx-auto px-6">
+        <div className="mb-20 text-center">
+          <h2 className="text-4xl md:text-5xl font-display font-semibold mb-6 tracking-tighter text-white">
+            Projects
+          </h2>
+          <p className="text-xl text-primary/60 max-w-2xl mx-auto leading-relaxed">
+            A collection of projects crafted with precision and care.
+          </p>
+        </div>
 
-      <div className="flex flex-col">
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            layoutId={`project-${project.title}`}
-            className="group relative flex flex-col md:flex-row md:items-center justify-between py-12 border-b border-white/5 hover:bg-white/[0.02] cursor-pointer transition-colors duration-300 px-4 -mx-4 rounded-lg"
-            onClick={() => setSelectedProject(project)}
-          >
-            <div className="z-10">
-              <h3 className="text-3xl md:text-5xl font-display font-medium text-primary/40 group-hover:text-white transition-colors">
-                {project.title}
-              </h3>
-            </div>
-
-            <div className="z-10 mt-2 md:mt-0 text-right">
-              <p className="text-primary/40 text-sm font-mono group-hover:text-primary/80 transition-colors">
-                {project.tech.join(' · ')}
-              </p>
-              <p className="text-primary/20 text-xs hidden md:block mt-1 group-hover:text-primary/60 transition-colors">
-                Read Case Study →
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              onClick={setSelectedProject}
+            />
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>
         {selectedProject && (
-          <ProjectDetail
+          <ProjectModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
           />

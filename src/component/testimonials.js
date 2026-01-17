@@ -90,16 +90,16 @@ const TestimonialCard = ({ testimonial, index }) => {
       <div className="flex gap-1 mb-4 mt-4">
         {[...Array(5)].map((_, i) => (
           <motion.div key={i}
-            initial={{ opacity: 0, scale: 0, rotate: -180 }} 
+            initial={{ opacity: 0, scale: 0, rotate: -180 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: index * 0.15 + 0.5 + i * 0.1, type: 'spring' }} 
+            transition={{ delay: index * 0.15 + 0.5 + i * 0.1, type: 'spring' }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.3, rotate: 20 }}
           >
             <FaStar className="text-yellow-400 text-sm" />
           </motion.div>
         ))}
-        <motion.span 
+        <motion.span
           className="text-xs text-yellow-400/60 ml-1"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -124,7 +124,7 @@ const TestimonialCard = ({ testimonial, index }) => {
         >
           {testimonial.avatar}
           {/* Online indicator */}
-          <motion.div 
+          <motion.div
             className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-[#1a1a1a]"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
@@ -133,12 +133,12 @@ const TestimonialCard = ({ testimonial, index }) => {
         <div className="flex-1">
           <h4 className="text-white font-semibold flex items-center gap-2">
             {testimonial.name}
-            <motion.span 
+            <motion.span
               className="text-blue-400 text-xs"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              ✓
+
             </motion.span>
           </h4>
           <p className="text-white/50 text-xs">{testimonial.role}</p>
@@ -168,7 +168,7 @@ const Testimonials = () => {
           <FaStar className="text-yellow-400" />
           <span className="text-sm font-medium text-white">What People Say</span>
         </motion.div>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+        <h2 className="text-4xl md:text-5xl font-display font-semibold mb-4">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Client</span>{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Testimonials</span>
         </h2>

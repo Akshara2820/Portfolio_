@@ -1,30 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 700 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    const mouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX - 10);
+      cursorY.set(e.clientY - 10);
     };
 
-    window.addEventListener("mousemove", mouseMove);
+    window.addEventListener('mousemove', moveCursor);
 
     return () => {
-      window.removeEventListener("mousemove", mouseMove);
+      window.removeEventListener('mousemove', moveCursor);
     };
   }, []);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full mix-blend-difference pointer-events-none z-50 hidden md:block"
-      animate={{ x: mousePosition.x - 8, y: mousePosition.y - 8 }}
-      transition={{ type: "tween", ease: "backOut", duration: 0 }}
-    />
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full mix-blend-difference pointer-events-none z-[9999] hidden md:block"
+        style={{
+          translateX: cursorXSpring,
+          translateY: cursorYSpring,
+        }}
+      />
+    </>
   );
 };
 
