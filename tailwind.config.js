@@ -5,42 +5,42 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Outfit', 'sans-serif'],
+      },
       colors: {
-        // Charcoal + Electric Mint Theme
-        background: '#0F1115',
+        background: '#050505', // Deep luxurious black
         surface: {
-          DEFAULT: '#1A1D23',
-          elevated: '#22262E',
+          DEFAULT: '#0F0F0F',
+          hover: '#1A1A1A',
+          active: '#242424',
         },
         primary: {
-          DEFAULT: '#00F5A0',  // Electric Mint
-          hover: '#00D88A',
-          glow: 'rgba(0, 245, 160, 0.3)',
-          subtle: 'rgba(0, 245, 160, 0.1)',
+          DEFAULT: '#FFFFFF', // Pure white for maximum contrast
+          muted: '#A1A1AA', // Zinc-400
         },
-        secondary: {
-          DEFAULT: '#5B6CFF',
-          hover: '#4A5AE8',
-          glow: 'rgba(91, 108, 255, 0.3)',
-          subtle: 'rgba(91, 108, 255, 0.1)',
-        },
-        text: {
-          primary: '#F5F7FA',
-          muted: '#8A8F98',
-        },
-        border: {
-          DEFAULT: 'rgba(138, 143, 152, 0.2)',
-          hover: 'rgba(0, 245, 160, 0.4)',
-        },
+        accent: {
+          DEFAULT: '#3B82F6', // Subtle tech blue (can be changed to silver/gold)
+          glow: 'rgba(59, 130, 246, 0.5)',
+        }
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'subtle-glow': 'radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%)',
       },
       animation: {
-        marquee: "marquee 20s linear infinite",
-        'spin-slow': 'spin 30s linear infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-50%)" },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     }

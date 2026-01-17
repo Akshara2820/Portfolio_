@@ -1,183 +1,62 @@
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaBriefcase, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const experiences = [
-  { company: "Masters' Union", role: "Frontend Developer", location: "Gurugram", type: "Hybrid", period: "Jan 2024 - Present", employment: "Full Time", color: '#FFFFFF', description: 'Building scalable web applications and leading frontend initiatives.' },
-  { company: "Tif Labs", role: "Frontend Developer", location: "Bangalore", type: "On-site", period: "Nov 2022 - Jan 2024", employment: "Full Time", color: '#E0E0E0', description: 'Developed multiple client-facing applications with React ecosystem.' },
-  { company: "Hyperverge", role: "Frontend Developer", location: "Bangalore", type: "Remote", period: "Nov 2021 - April 2022", employment: "Internship", color: '#A0A0A0', description: 'Started my professional journey building AI-powered interfaces.' },
+  {
+    company: "Masters' Union",
+    role: "Frontend Developer",
+    period: "2024 - Present",
+    description: "Building scalable web platforms and leading frontend architecture decisions."
+  },
+  {
+    company: "Tif Labs",
+    role: "Frontend Developer",
+    period: "2022 - 2024",
+    description: "Developed client-facing applications using the modern React ecosystem."
+  },
+  {
+    company: "Hyperverge",
+    role: "Frontend Developer Intern",
+    period: "2021 - 2022",
+    description: "Contributed to AI-powered interface development and component libraries."
+  },
 ];
 
-const ExperienceCard = ({ experience, index, isLeft }) => {
-  const cardRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Fun emojis for each experience
-  const experienceEmojis = ['🚀', '💼', '🌟'];
-
-  return (
-    <motion.div
-      ref={cardRef}
-      className={`relative flex items-center ${isLeft ? 'lg:justify-start' : 'lg:justify-end'} justify-center mb-12 lg:mb-0`}
-      initial={{ opacity: 0, x: isLeft ? -100 : 100, rotateY: isLeft ? -15 : 15 }}
-      whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.2, type: 'spring', stiffness: 100 }}
-      viewport={{ once: true, amount: 0.3 }}
-    >
-      {/* Connection line to center */}
-      <motion.div
-        className={`hidden lg:block absolute top-1/2 h-[2px] w-16 ${isLeft ? 'left-[calc(50%-64px)]' : 'right-[calc(50%-64px)]'}`}
-        style={{ background: `linear-gradient(${isLeft ? '90deg' : '270deg'}, ${experience.color}, transparent)` }}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-        viewport={{ once: true }}
-      />
-
-      {/* Timeline dot with emoji */}
-      <motion.div
-        className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full items-center justify-center z-20"
-        style={{ backgroundColor: `${experience.color}30`, border: `2px solid ${experience.color}`, boxShadow: `0 0 20px ${experience.color}` }}
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ duration: 0.4, delay: index * 0.2 + 0.2, type: 'spring' }}
-        viewport={{ once: true }}
-        whileHover={{ scale: 1.3 }}
-      >
-        <motion.span 
-          className="text-lg"
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          {experienceEmojis[index % experienceEmojis.length]}
-        </motion.span>
-        <motion.div className="absolute w-full h-full rounded-full"
-          style={{ backgroundColor: experience.color }}
-          animate={{ scale: [1, 2, 1], opacity: [0.3, 0, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-      </motion.div>
-
-      {/* Card */}
-      <motion.div
-        className={`group w-full lg:w-[45%] p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-white/10 overflow-hidden relative ${isLeft ? 'lg:mr-auto' : 'lg:ml-auto'}`}
-        whileHover={{ scale: 1.02, y: -5, borderColor: `${experience.color}40` }}
-        transition={{ duration: 0.3 }}
-        style={{ perspective: 1000 }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-      >
-        {/* Glow effect */}
-        <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{ background: `radial-gradient(circle at ${isLeft ? '100%' : '0%'} 50%, ${experience.color}15, transparent 60%)` }}
-        />
-
-        {/* Content */}
-        <div className="relative z-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <motion.h3 className="text-xl font-bold text-white flex items-center gap-2"
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: index * 0.2 + 0.4 }} viewport={{ once: true }}
-            >
-              {experience.company}
-              {index === 0 && (
-                <motion.span 
-                  className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 border border-green-500/30"
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  Current
-                </motion.span>
-              )}
-            </motion.h3>
-            <motion.span className="text-xs px-3 py-1.5 rounded-full font-medium"
-              style={{ backgroundColor: `${experience.color}20`, color: experience.color, border: `1px solid ${experience.color}40` }}
-              initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: index * 0.2 + 0.5 }} viewport={{ once: true }}
-              whileHover={{ scale: 1.1 }}
-            >
-              {experience.employment}
-            </motion.span>
-          </div>
-
-          <motion.p className="text-white/80 font-medium mb-2 flex items-center gap-2"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: index * 0.2 + 0.5 }} viewport={{ once: true }}
-          >
-            {experience.role}
-            <motion.span 
-              className="text-sm"
-              animate={isHovered ? { rotate: [0, 20, 0] } : {}}
-              transition={{ duration: 0.5 }}
-            >
-              💻
-            </motion.span>
-          </motion.p>
-
-          <motion.p className="text-white/50 text-sm mb-4"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: index * 0.2 + 0.55 }} viewport={{ once: true }}
-          >
-            {experience.description}
-          </motion.p>
-
-          <motion.div className="flex flex-wrap gap-4 text-sm text-white/50"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: index * 0.2 + 0.6 }} viewport={{ once: true }}
-          >
-            <motion.div className="flex items-center gap-2" whileHover={{ x: 3 }}>
-              <FaMapMarkerAlt style={{ color: experience.color }} />
-              <span>{experience.location} · {experience.type}</span>
-            </motion.div>
-            <motion.div className="flex items-center gap-2" whileHover={{ x: 3 }}>
-              <FaCalendarAlt style={{ color: experience.color }} />
-              <span>{experience.period}</span>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Bottom accent line */}
-        <motion.div className="absolute bottom-0 left-0 h-1 rounded-full"
-          style={{ backgroundColor: experience.color }}
-          initial={{ width: 0 }} animate={{ width: isHovered ? '100%' : '0%' }} transition={{ duration: 0.3 }}
-        />
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const Experience = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
   return (
-    <section id="experience" ref={containerRef} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-10 py-24 text-white">
-      {/* Header */}
-      <motion.div className="text-center mb-20"
-        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
+    <section id="experience" className="py-24">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="mb-12 border-b border-white/10 pb-4 flex justify-between items-end"
       >
-        <motion.div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-white/10 to-gray-400/10 border border-white/10"
-          initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
-        >
-          <FaBriefcase className="text-white" />
-          <span className="text-sm font-medium text-white">Career Journey</span>
-        </motion.div>
-        <h2 className="text-4xl sm:text-5xl font-bold">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">Work</span>{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Experience</span>
-        </h2>
+        <h2 className="text-3xl font-display font-medium">Experience</h2>
+        <span className="text-sm text-primary/40 font-mono">My Path</span>
       </motion.div>
 
-      {/* Timeline */}
-      <div className="relative">
-        {/* Center line */}
-        <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-white/10" />
-        <motion.div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 w-[2px] bg-gradient-to-b from-white via-gray-400 to-gray-500"
-          style={{ height: lineHeight }}
-        />
-
-        {/* Experience cards */}
-        <div className="relative space-y-8 lg:space-y-16">
-          {experiences.map((exp, index) => (
-            <ExperienceCard key={index} experience={exp} index={index} isLeft={index % 2 === 0} />
-          ))}
-        </div>
+      <div className="space-y-8">
+        {experiences.map((exp, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            viewport={{ once: true }}
+            className="group grid grid-cols-1 md:grid-cols-12 gap-4 py-8 border-b border-white/5 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg"
+          >
+            <div className="md:col-span-3">
+              <span className="text-primary/40 font-mono text-sm">{exp.period}</span>
+            </div>
+            <div className="md:col-span-4">
+              <h3 className="text-xl font-display font-medium text-white">{exp.company}</h3>
+              <p className="text-primary/60 text-sm mt-1">{exp.role}</p>
+            </div>
+            <div className="md:col-span-5">
+              <p className="text-primary/70 leading-relaxed max-w-lg">{exp.description}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
