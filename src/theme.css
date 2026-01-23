@@ -1,6 +1,11 @@
 /* ⚫ Monochrome Black & Gray Theme ⚫ */
 /* Elegant, minimal, sophisticated - Clean grayscale palette */
 
+/* Hide default cursor globally */
+* {
+  cursor: none !important;
+}
+
 :root {
   /* Core Colors - Pure Black to White spectrum */
   --color-background: #000000;

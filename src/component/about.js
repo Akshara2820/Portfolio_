@@ -57,7 +57,7 @@ const About = () => {
           className="relative max-w-[350px] mx-auto md:ml-auto"
         >
           <div className="absolute inset-0 bg-accent/20 blur-[100px] rounded-full mix-blend-screen" />
-          <div className="relative aspect-[3/4] rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+          <div className="relative aspect-[3/4] rounded-2xl overflow-hidden transition-all duration-700">
             <img
               src="/pic3.jpg"
               alt="Portrait"
